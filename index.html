@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Futuristic Website</title>
+    <style>
+        /* General Styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 10;
+        }
+
+        .navbar-item {
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-item:hover {
+            color: #00ffcc;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Scrollable Button Section */
+        .button-container {
+            display: flex;
+            overflow-x: auto;
+            width: 100%;
+            padding: 10px 0;
+            white-space: nowrap;
+            scrollbar-width: none; /* For Firefox */
+        }
+
+        .button-container::-webkit-scrollbar {
+            display: none; /* For Webkit browsers */
+        }
+
+        .futuristic-button {
+            background: none;
+            color: #ffffff;
+            border: 2px solid #00ffcc;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 0 10px;
+            position: relative;
+            overflow: hidden;
+            transition: color 0.4s, background 0.4s;
+            border-radius: 5px;
+        }
+
+        .futuristic-button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 255, 204, 0.2);
+            transition: transform 0.4s;
+            transform: scaleX(0);
+            transform-origin: right;
+            z-index: -1;
+        }
+
+        .futuristic-button:hover {
+            color: #000;
+            background: #00ffcc;
+        }
+
+        .futuristic-button:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        /* Swappable Cards */
+        .card-scroll-container {
+            overflow-x: auto;
+            display: flex;
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            scrollbar-width: thin;
+            scrollbar-color: #00ffcc #2c5364;
+        }
+
+        .card-scroll-container::-webkit-scrollbar {
+            height: 10px;
+        }
+
+        .card-scroll-container::-webkit-scrollbar-thumb {
+            background: #00ffcc;
+            border-radius: 10px;
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 20px;
+            padding: 20px;
+            box-sizing: border-box;
+            transition: transform 0.5s ease;
+        }
+
+        .card {
+            min-width: 300px;
+            max-width: 300px;
+            height: 250px;
+            perspective: 1000px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .card-front, .card-back {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            backface-visibility: hidden;
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            border-radius: 10px;
+            box-sizing: border-box;
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+            background: linear-gradient(135deg, #43cea2, #185a9d);
+        }
+
+        .card:hover {
+            transform: rotateY(180deg);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .card-container {
+                flex-direction: row;
+                overflow-x: auto;
+                justify-content: flex-start;
+                gap: 10px;
+            }
+
+            .card {
+                min-width: 80%;
+                height: 150px;
+            }
+
+            .futuristic-button {
+                font-size: 14px;
+                padding: 8px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-item">Home</div>
+        <div class="navbar-item">Explore</div>
+        <div class="navbar-item">Contact</div>
+        <div class="navbar-item">About Us</div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Scrollable Button Section -->
+        <div class="button-container">
+            <button class="futuristic-button">Button 1</button>
+            <button class="futuristic-button">Button 2</button>
+            <button class="futuristic-button">Button 3</button>
+            <button class="futuristic-button">Button 4</button>
+            <button class="futuristic-button">Button 5</button>
+        </div>
+
+        <!-- Swappable Cards Container -->
+        <div class="card-scroll-container">
+            <!-- Swappable Cards -->
+            <div class="card-container">
+                <!-- Repeat card element for multiple cards -->
+                <div class="card">
+                    <div class="card-front">
+                        <h2>Card 1</h2>
+                        <p>Front side of card 1</p>
+                    </div>
+                    <div class="card-back">
+                        <h2>Details</h2>
+                        <p>Back side of card 1 with more information.</p>
+                    </div>
+                </div>
+                <!-- Adding more cards -->
+                <div class="card">
+                    <div class="card-front">
+                        <h2>Card 2</h2>
+                        <p>Front side of card 2</p>
+                    </div>
+                    <div class="card-back">
+                        <h2>Details</h2>
+                        <p>Back side of card 2 with more information.</p>
+                    </div>
+                </div>
+                <!-- Add more cards as needed -->
+                <div class="card">
+                    <div class="card-front">
+                        <h2>Card 3</h2>
+                        <p>Front side of card 3</p>
+                    </div>
+                    <div class="card-back">
+                        <h2>Details</h2>
+                        <p>Back side of card 3 with more information.</p>
+                    </div>
+                </div>
+                <!-- Repeat to 10+ cards -->
+                <div class="card">
+                    <div class="card-front">
+                        <h2>Card 4</h2>
+                        <p>Front side of card 4</p>
+                    </div>
+                    <div class="card-back">
+                        <h2>Details</h2>
+                        <p>Back side of card 4 with more information.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-front">
+                        <h2>Card 5</h2>
+                        <p>Front side of card 5</p>
+                    </div>
+                    <div class="card-back">
+                        <h2>Details</h2>
+                        <p>Back side of card 5 with more information.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-front">
+                        <h2>Card 6</h2>
+                        <p>Front side of card 6</p>
+                    </div>
+                    <div class="card-back">
+                        <h2>Details</h2>
+                        <p>Back side of card 6 with more information.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-front">
+                        <h2>Card 7</h2>
+                        <p>Front side of card 7</p>
+                    </div>
+                    <div class="card-back">
+                        <h2>Details</h2>
+                        <p>Back side of card 7 with more information.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-front">
+                        <h2>Card 8</h2>
+                        <p>Front side of card 8</p>
+                    </div>
+                    <div class="card-back">
+                        <h2>Details</h2>
+                        <p>Back side of card 8 with more information.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-front">
+                        <h2>Card 9</h2>
+                        <p>Front side of card 9</p>
+                    </div>
+                    <div class="card-back">
+                        <h2>Details</h2>
+                        <p>Back side of card 9 with more information.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-front">
+                        <h2>Card 10</h2>
+                        <p>Front side of card 10</p>
+                    </div>
+                    <div class="card-back">
+                        <h2>Details</h2>
+                        <p>Back side of card 10 with more information.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    <div class="card-">HOVER</div>
+    
+    <!-- JavaScript for interactivity -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Website fully loaded and ready for interaction.');
+
+            // Error handler for JavaScript errors
+           
+
+            // Horizontal scroll for buttons and cards using mouse wheel
+            const buttonContainer = document.querySelector('.button-container');
+            const cardScrollContainer = document.querySelector('.card-scroll-container');
+
+            buttonContainer.addEventListener('wheel', (event) => {
+                event.preventDefault();
+                buttonContainer.scrollLeft += event.deltaY;
+            });
+
+            cardScrollContainer.addEventListener('wheel', (event) => {
+                event.preventDefault();
+                cardScrollContainer.scrollLeft += event.deltaY;
+            });
+
+            // Swipe events for touch support (corrected direction)
+            let startX;
+
+            const handleTouchStart = (event) => {
+                startX = event.touches[0].clientX;
+            };
+
+            const handleTouchMove = (event) => {
+                if (!startX) return;
+
+                let moveX = event.touches[0].clientX;
+                let diffX = moveX - startX; // Flip direction for natural swipe
+
+                cardScrollContainer.scrollLeft -= diffX; // Correcting direction here
+                startX = moveX;
+            };
+
+            cardScrollContainer.addEventListener('touchstart', handleTouchStart, { passive: true });
+            cardScrollContainer.addEventListener('touchmove', handleTouchMove, { passive: true });
+
+            // Keyboard arrow navigation for card scrolling
+            document.addEventListener('keydown', (event) => {
+                const scrollAmount = -1000;
+                if (event.key === 'ArrowRight') {
+                    cardScrollContainer.scrollLeft += scrollAmount;
+                } else if (event.key === 'ArrowLeft') {
+                    cardScrollContainer.scrollLeft -= scrollAmount;
+                }
+            });
+        });
+    </script>
+    <style>
+        /* From Uiverse.io by eslam-hany */ 
+.card- {
+  position: relative;
+  width: 220px;
+  height: 320px;
+  background: mediumturquoise;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  font-weight: bold;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.card-::before,
+.card-::after {
+  position: absolute;
+  content: "";
+  width: 20%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  font-weight: bold;
+  background-color: lightblue;
+  transition: all 0.5s;
+}
+
+.card-::before {
+  top: 0;
+  right: 0;
+  border-radius: 0 15px 0 100%;
+}
+
+.card-::after {
+  bottom: 0;
+  left: 0;
+  border-radius: 0 100%  0 15px;
+}
+
+.card-:hover::before,
+.card-:hover:after {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  transition: all 0.5s;
+}
+
+.card-:hover:after {
+  content: "HELLO";
+}
+    </style>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #141E30, #243B55);
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+        }
+
+        
+
+        .navbar a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+            position: relative;
+        }
+
+        .navbar a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #00c6ff;
+            bottom: -3px;
+            left: 0;
+            transition: width 0.3s ease-in-out;
+        }
+
+        .navbar a:hover::after {
+            width: 100%;
+        }
+
+        .upload-container {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #file-upload {
+            margin-right: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background: #ffffff;
+            color: #000;
+            font-weight: bold;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background: #00c6ff;
+            color: #ffffff;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #0074cc;
+        }
+
+        #message {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .success {
+            background-color: #4CAF50;
+        }
+
+        .error {
+            background-color: #f44336;
+        }
+
+        .info {
+            background-color: #2196F3;
+        }
+
+        #file-list {
+            margin-top: 20px;
+            padding: 10px;
+            background: rgba(36, 59, 85, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .file-item {
+            background-color: #444;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .file-item a {
+            color: #00c6ff;
+            text-decoration: none;
+        }
+
+        .file-item button {
+            background: #ff5722;
+            margin-left: 10px;
+        }
+
+        #audio-player {
+            margin-top: 30px;
+            padding: 15px;
+            background: rgba(36, 59, 85, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+
+        #audio-player h3 {
+            margin-bottom: 15px;
+        }
+
+        audio {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    
+    
+
+    <div id="message" class="info"></div>
+
+    <h2>Uploaded Files</h2>
+    <div id="file-list"></div>
+
+    <div id="audio-player">
+        <h3>Now Playing:</h3>
+        <audio id="player" controls>
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+    import { getStorage, ref, uploadBytes, listAll, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-storage.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyD_5AjK10O3EV7ABphlf_G3hvySe_ThcuA",
+        authDomain: "study-9fff4.firebaseapp.com",
+        projectId: "study-9fff4",
+        storageBucket: "study-9fff4.appspot.com",
+        messagingSenderId: "162885368635",
+        appId: "1:162885368635:web:ca7bd19f974672764ad51e",
+        measurementId: "G-W4XGMJ6B3L"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const storage = getStorage(app);
+
+    // Mapping original file names to custom names
+    const fileNameMap = {
+        "town-10169.mp3": "Town",
+        "The Weeknd - Blinding Lights Mp3 Song Download(OyeDjSurendra.Com).mp3": "Blinding lights",
+        // Add more mappings as needed
+        // "original-filename.ext": "Custom Name",
+    };
+
+    function showMessage(text, type) {
+        const messageDiv = document.getElementById('message');
+        messageDiv.innerText = text;
+        messageDiv.className = type;
+        messageDiv.style.display = 'block';
+    }
+
+    async function uploadFiles() {
+        const fileUpload = document.getElementById('file-upload');
+        const files = fileUpload.files;
+
+        if (files.length === 0) {
+            showMessage('No files selected for upload.', 'error');
+            return;
+        }
+
+        showMessage('Uploading files, please wait...', 'info');
+
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            const storageRef = ref(storage, 'uploads/' + file.name);
+            
+            try {
+                await uploadBytes(storageRef, file);
+                showMessage('Successfully uploaded: ' + file.name, 'success');
+                displayFiles();
+            } catch (error) {
+                console.error('Upload failed:', error);
+                showMessage('Failed to upload ' + file.name + ': ' + error.message, 'error');
+            }
+        }
+    }
+
+    async function displayFiles() {
+        const fileList = document.getElementById('file-list');
+        fileList.innerHTML = '';
+
+        const storageRef = ref(storage, 'uploads');
+        
+        try {
+            const result = await listAll(storageRef);
+            if (result.items.length === 0) {
+                fileList.innerHTML = '<p>No files found.</p>';
+                return;
+            }
+
+            for (const itemRef of result.items) {
+                const url = await getDownloadURL(itemRef);
+                const originalName = itemRef.name;
+                const customName = fileNameMap[originalName] || originalName; // Use custom name or fallback to original
+
+                const div = document.createElement('div');
+                div.className = 'file-item';
+                div.innerHTML = `<a href="${url}" target="_blank">${customName}</a>`;
+
+                if (originalName.match(/\.(mp3|wav|ogg)$/i)) {
+                    const playButton = document.createElement('button');
+                    playButton.innerText = 'Play';
+                    playButton.onclick = function() {
+                        playAudio(url, customName);
+                    };
+                    div.appendChild(playButton);
+                }
+
+                fileList.appendChild(div);
+            }
+        } catch (error) {
+            console.error('Failed to list files:', error);
+            showMessage('Failed to list files: ' + error.message, 'error');
+        }
+    }
+
+    function playAudio(url, displayName) {
+        const audioPlayerDiv = document.getElementById('audio-player');
+        const player = document.getElementById('player');
+        const nowPlaying = document.querySelector('#audio-player h3');
+
+        nowPlaying.innerText = `Now Playing: ${displayName}`;
+        player.src = url;
+        player.play();
+
+        audioPlayerDiv.style.display = 'block';
+    }
+
+    window.onload = displayFiles;
+</script>
+
+</body>
+</html>
